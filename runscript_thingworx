@@ -1,0 +1,38 @@
+#!/bin/bash
+# This is for Thingworx, commented out m2x 9/14/2016 LC
+echo "runscript: $(date)"
+
+# Test if rest2Thingworx is running, and Restart if needed
+if(( $(ps -ef | grep -v grep | grep -F 'python rest2Thingworx.py' | wc -l) > 0))
+then
+echo "rest2Thingworx.py is running."
+else
+cd /opt/ingenu/m2m/m2m_thingworx
+echo "ERROR: rest2Thingworx.py was not running, restarted."
+stdbuf -oL python rest2Thingworx.py >> log_rest2Thingworx.txt &
+fi
+
+# Test if m2xCallback is running, and Restart if needed
+# if(( $(ps -ef | grep -v grep | grep -F 'python m2xCallback.py' | wc -l) > 0))
+# then
+# echo "m2xCallback.py is running."
+# else
+# cd /opt/M2X
+# echo "ERROR: m2xCallback.py was not running, restarted."
+# stdbuf -oL python m2xCallback.py >> log_m2xCallback.txt &
+# fi
+
+# Test if m2xCallback is able to accept a POST and Restart if needed
+# This error has happened: m2xCallback is running but returns errno 5 Input/output error
+# sleep 2 # delay in case we just started m2xCallback above...
+# cd /opt/M2X
+# a=$(python test_m2xCallback.py)
+# b=$(echo $a | grep Exception | wc -l)
+# echo
+# if(($b > 0))
+# then
+#    ps -ef | grep -v grep | grep -F 'python m2xCallback.py' | awk '{print $2}' | xargs kill
+#    cd /opt/M2X
+#    echo "ERROR: m2xCallback.py did not respond to a test POST, killed, now restarting"
+#    stdbuf -oL python m2xCallback.py >> log_m2xCallback.txt &
+# fi

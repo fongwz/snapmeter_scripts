@@ -1,0 +1,1 @@
+{"useStartDatetime":"0", "startUtcDatetime":"datetime.datetime(2017,11,6,0,5,0)", "useEndDatetime":"0", "endUtcDatetime":"datetime.datetime(2019, 07,07,02,05,00)", "writeGps2Csv":"0", "warnUnknownDevice":"0", "enableFindJoinedAp":"0", "warnNoDevice":"0", "warnNoHeadEnd":"0", "warnGpsDecimation":"0"}
